@@ -2,6 +2,49 @@ import * as React from 'react';
 import {HelloComponent} from './hello';
 import { NameEditComponent } from './nameEdit';
 
+interface Props {
+
+}
+
+interface State {
+    name: string;
+    editingUsername: string;
+}
+
+export class App extends React.Component<Props, State> {
+    constructor(props: Props) {
+        super(props);
+
+        const defaultUsername = 'defaultusername';
+        this.state = {name: defaultUsername, editingUsername: defaultUsername};
+    }
+
+
+setUsernameState = () => {
+    this.setState({name: this.state.editingUsername})
+}
+
+updateEditingName = (editingName: string) => {
+    this.setState({editingUsername: editingName})
+}
+
+chedDisable = () => !this.state.editingUsername || this.state.editingUsername === this.state.name;
+
+render() {
+    return (
+        <>
+        <HelloComponent userName={this.state.name} />
+        <NameEditComponent 
+            editingName={this.state.editingUsername}
+            onEditingNameUpdated={this.updateEditingName}
+            onNameSubmit={this.setUsernameState}
+            disabled= {this.chedDisable()} />
+       </>
+    )
+}
+
+}
+/*
 //Custom hook
 const useName = () => {
     //nombre default
@@ -47,3 +90,4 @@ export const App = () => {
        </>
    )
 }
+*/
