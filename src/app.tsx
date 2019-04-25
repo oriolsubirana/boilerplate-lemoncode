@@ -2,6 +2,7 @@ import * as React from 'react';
 import {HelloComponent} from './hello';
 import { NameEditComponent } from './nameEdit';
 
+/*
 interface Props {
 
 }
@@ -30,6 +31,12 @@ updateEditingName = (editingName: string) => {
 
 chedDisable = () => !this.state.editingUsername || this.state.editingUsername === this.state.name;
 
+componentDidMount() {
+    setTimeout(() => {
+        this.setState({name: "name from async call"});
+        this.setState({editingUsername: "name from async call"});
+    }, 500)
+}
 render() {
     return (
         <>
@@ -44,7 +51,8 @@ render() {
 }
 
 }
-/*
+*/
+
 //Custom hook
 const useName = () => {
     //nombre default
@@ -71,6 +79,30 @@ export const App = () => {
         setName(editingName);
     }
 
+/*
+    //ComponentDidMount -- Cuando se instancia el componente
+    React.useEffect(() => {
+        loadUsername();
+    }, [])
+
+    //Cada vez que se actualice el name
+    React.useEffect(() => {
+        loadUsername();
+    }, [name])
+
+    //ComponentWillUnmount -- antes de montarse
+    React.useEffect(() => {
+        loadUsername();
+        return () => {console.log('componentWillUnmount');}
+    })
+
+    //ComponentDidUpdated -- despues de actualizar el componente
+    React.useEffect(() => {
+        loadUsername();
+    })
+
+*/
+
     //con los claudators solo se ejecuta una vez el loadUsername
     //cargamos el nombre de la llamada ajax
     React.useEffect(() => {
@@ -90,4 +122,3 @@ export const App = () => {
        </>
    )
 }
-*/
