@@ -34,13 +34,16 @@ export const App = () => {
         loadUsername();
     },[])
 
+    const chedDisable = () => !editingName || editingName === name;
+
    return (
        <>
         <HelloComponent userName={name} />
         <NameEditComponent 
             editingName={editingName}
             onEditingNameUpdated={setEditingName}
-            onNameSubmit={setUsernameState} />
+            onNameSubmit={setUsernameState}
+            disabled= {chedDisable()} />
        </>
    )
 }
